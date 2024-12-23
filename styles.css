@@ -126,7 +126,7 @@ input[type="text"]{
 	max-width: 38em;
 }
 
-div {
+.container {
   width: 60%;
   background-color: #1b1b32;
   margin-left: auto;
