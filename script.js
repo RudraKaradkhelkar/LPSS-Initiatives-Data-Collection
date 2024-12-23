@@ -56,57 +56,5 @@ document.addEventListener('DOMContentLoaded', function () {
             newOrgInput.style.display = 'none';
             newOrgInput.value = '';
         }
-
-        console.log("its working");
-        const department = document.getElementById('department').value;
-        console.log("its working2");
-        const organization = document.getElementById('organization-name').value;
-        console.log("its working3");
-        var initiativeType = '';
-
-        if(document.getElementById('non-profit').checked){
-            initiativeType = document.getElementById('non-profit').value;
-        } else if(document.getElementById('business').checked){
-            initiativeType = document.getElementById('business').value;
-        }
-        console.log("its working4"); 
-
-        const initiativeDate = document.getElementById('initiative-date').value;
-        console.log("its working5"); 
-        const typeOfSupport = document.getElementById('type-of-support').value;
-        console.log("its working6"); 
-        const provided = document.getElementById('provided').value;
-        console.log("its working7"); 
-        const focusArea = document.getElementById('focus-area').value;
-        console.log("its working8"); 
-        const whyItFits = document.getElementById('why-does-it-fit').value;
-        console.log("its working9"); 
-
-        const data = { 
-            department, 
-            organization, 
-            initiativeType, 
-            initiativeDate,
-            typeOfSupport,
-            provided,
-            focusArea,
-            whyItFits, 
-        };         
-
-        fetch('https://script.google.com/macros/s/AKfycbx79uVhEI5Rup5dvhPl4kDpMXP19J3Z_uekqR5BRttE-O1PkIU0L2sm4J4roavqHKTy/exec', { 
-            method: 'POST', 
-            body: JSON.stringify(data), 
-            headers: { 
-                'Content-Type': 'application/json' 
-                } 
-            }) 
-            .then(response => response.text()) 
-            .then(result => { 
-                alert('Form submitted successfully. Thank you for helping improve LPSS!');
-                document.getElementById('data-collection-form').reset();
-            }) 
-            .catch(error => { 
-                console.error('Error!', error.message); 
-            });
     });
 });
