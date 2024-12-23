@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}) 
 		.then(response => response.json()) 
 		.then(data => {
-            alert("It worked");
+            alert("Form submitted successfully. Thank you for supporting LPSS!");
             document.getElementById('data-collection-form').reset();
             deptSelect.value = '';
 		}) 
