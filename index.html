@@ -8,16 +8,17 @@
   <body>
   <h1><strong>LPSS Initiatives Data Collection</strong></h1>
         <p><em>Please fill out this form with the required information</em></p>
-        <div class="menu">
-        <form id="data-collection-form" action="https://script.google.com/macros/s/AKfycbyYp1Ugj33NpSUqhtvIW7nqnzXy2sOv1uq8z-5j1BYChmcy0NKN5YAMRrATDcxfTfNF/exec" method="POST" onsubmit="return false;">
-			
-            <fieldset>
+        <div class="container">
+        <form id="data-collection-form" action="https://script.google.com/macros/s/AKfycbx19-QpVuVuD_htD_nA0y346W4hrLCAAimIjjl0k5u3P_-go6sfv9cdItylkzm-KhZItw/exec" method="POST" onsubmit="return false;">
+				
+					<input type ='hidden' id="timestamp" name="TIMESTAMP"/>
+
+          <fieldset>
 				<legend>LPSS Department Filling Out Form</legend>
 				<label for="department">Department
-				  <select required id="department" name="Department">
+				  <select required id="department" name="DEPARTMENT">
 						<option value="">(select one)</option>
-						<option value="Transportation">Transportation</option>
-						<option value="Other">Other</option>
+						<option value="TRANSPORTATION">Transportation</option>
 			  		</select>
 				</label>
 				<input type="text" id="newDeptInput" placeholder="Enter New Department" style="display: none; margin-top: 1em; margin-bottom: 0.5em;">
@@ -25,65 +26,50 @@
 
             <fieldset>
 				<legend>Intiative Data</legend>
-				<label for="organization-name">Organization That Ran Initiative <select id="organization-name" name="Organization Name" required>
+				<label for="organization-name">Organization That Ran Initiative <select id="organization-name" name="ORGANIZATION THAT RAN THE INITIATIVE" required>
 					<option value="">(select one)</option>
-					<option value="love-our-schools">Love Our Schools</option>
-					<option value="Other">Other</option>
+					<option value="LOVE OUR SCHOOLS">Love Our Schools</option>
 				</select>
 				</label>
 				<input type="text" id="newOrgInput" placeholder="Enter New Organization" style="display: none; margin-top: 1em; margin-bottom: 0.5em;">
 	
 				<label id="initiative-type">Initiative Type
 				  <label for="non-profit">
-				    <input type="radio" name="Initiative Type" value="non-profit" id="non-profit" class="inline">
+				    <input type="radio" name="INITIATIVE TYPE" value="NON-PROFIT" id="non-profit" class="inline">
 				    Non-Profit</label>
 				  <label for="business">
-				    <input type="radio" name="Initiative Type" value="business" id="business" class="inline">
+				    <input type="radio" name="INITIATIVE TYPE" value="BUSINESS" id="business" class="inline">
 				    Business</label>
 			  	</label>
-			  <label for="intiative-date">When did this Initiative Occur<input type="date" id="initiative-date" name="Initiative Date" required/></label>
+			  <label for="intiative-date">When did this Initiative Occur<input type="date" id="initiative-date" name="WHEN DID THIS INITATIVE OCCUR" required/></label>
 			</fieldset>
 			
             <fieldset>
 				<legend>Type of Support</legend>
 				<label>Type 
-					<select id="type-of-support" name="Type of Support" required>
+					<select id="type-of-support" name="TYPE OF SUPPORT" required>
 						<option value="">(select one)</option>
-						<option value="Monetary">Monetary</option>
-						<option value="Voluntary">Voluntary</option>
-						<option value="Items">Items</option>
+						<option value="MONETARY">Monetary</option>
+						<option value="VOLUNTEERS">Volunteers</option>
+						<option value="ITEMS">Items</option>
 					</select></label>
-				<label for="provided">What did the Initiative Provide<textarea required id="provided" name="What did the Initiative Provide"></textarea></label>
+				<label for="provided">What did the Initiative Provide<textarea required id="provided" name="WHAT DID THIS INITIATIVE PROVIDE (SPECIFIC)"></textarea></label>
 		  	</fieldset>
 
             <fieldset>
 				<legend>LPSS Core Values Focus Area</legend>
 				<label for="focus-area">Focus Area
-					<select required id="focus-area" name="Focus Area">
+					<select required id="focus-area" name="CORE VALUES FOCUS AREA">
 						<option value="">(select one)</option>
-						<option value="Safety">Safety</option>
-						<option value="Culture">Culture</option>
-						<option value="Growth">Growth</option>
-						<option value="Opportunity">Opportunity</option>
+						<option value="SAFETY">Safety</option>
+						<option value="CULTURE">Culture</option>
+						<option value="GROWTH">Growth</option>
+						<option value="OPPORTUNITY">Opportunity</option>
 					</select></label>
-				<label for="why-does-it-fit">Why does the initiative fit that focus area <textarea required id="why-does-it-fit" name="Why Does the Initiative Fit" rows="5" cols="30"></textarea></label>
+				<label for="why-does-it-fit">Why does the initiative fit that focus area <textarea required id="why-does-it-fit" name="WHY DOES THE INITATIVE FIT THE CHOSEN FOCUS AREA" rows="5" cols="30"></textarea></label>
 			</fieldset>
             <input type="submit" value="Submit" />
         </form>
-				<script>
-					document.getElementById('data-collection-form').addEventListener('submit', function(e) { 
-						e.preventDefault(); 
-						const formData = new FormData(this); 
-						fetch(this.action, { 
-							method: 'POST', 
-							body: formData, 
-						}) 
-						.then(response => response.json()) 
-						.then(data => { alert("It worked"); 
-						}) 
-						.catch(error => console.error('Error:', error)); 
-					});
-				</script>
     </div>
 	<script src="script.js"></script>
 </body>
