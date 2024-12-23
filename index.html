@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LPSS Initiatives Data Collection</title>
+    <link href="styles.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+  <h1><strong>LPSS Initiatives Data Collection</strong></h1>
+        <p><em>Please fill out this form with the required information</em></p>
+        <div class="menu">
+        <form id="data-collection-form">
+			
+            <fieldset>
+				<legend>LPSS Department Filling Out Form</legend>
+				<label for="department">Department
+				  <select required id="department" name="Department">
+						<option value="">(select one)</option>
+						<option value="Transportation">Transportation</option>
+						<option value="Other">Other</option>
+			  		</select>
+				</label>
+				<input type="text" id="newDeptInput" placeholder="Enter New Department" style="display: none; margin-top: 1em; margin-bottom: 0.5em;">
+			</fieldset>
+
+            <fieldset>
+				<legend>Intiative Data</legend>
+				<label for="organization-name">Organization That Ran Initiative <select id="organization-name" name="Organization Name" required>
+					<option value="">(select one)</option>
+					<option value="love-our-schools">Love Our Schools</option>
+					<option value="Other">Other</option>
+				</select>
+				</label>
+				<input type="text" id="newOrgInput" placeholder="Enter New Organization" style="display: none; margin-top: 1em; margin-bottom: 0.5em;">
+	
+				<label id="initiative-type">Initiative Type
+				  <label for="non-profit">
+				    <input type="radio" name="Initiative Type" value="non-profit" id="non-profit" class="inline">
+				    Non-Profit</label>
+				  <label for="business">
+				    <input type="radio" name="Initiative Type" value="business" id="business" class="inline">
+				    Business</label>
+			  	</label>
+			  <label for="intiative-date">When did this Initiative Occur<input type="date" id="initiative-date" name="Initiative Date" required/></label>
+			</fieldset>
+			
+            <fieldset>
+				<legend>Type of Support</legend>
+				<label>Type 
+					<select id="type-of-support" name="Type of Support" required>
+						<option value="">(select one)</option>
+						<option value="Monetary">Monetary</option>
+						<option value="Voluntary">Voluntary</option>
+						<option value="Items">Items</option>
+					</select></label>
+				<label for="provided">What did the Initiative Provide<textarea required id="provided" name="What did the Initiative Provide"></textarea></label>
+		  	</fieldset>
+
+            <fieldset>
+				<legend>LPSS Core Values Focus Area</legend>
+				<label for="focus-area">Focus Area
+					<select required id="focus-area" name="Focus Area">
+						<option value="">(select one)</option>
+						<option value="Safety">Safety</option>
+						<option value="Culture">Culture</option>
+						<option value="Growth">Growth</option>
+						<option value="Opportunity">Opportunity</option>
+					</select></label>
+				<label for="why-does-it-fit">Why does the initiative fit that focus area <textarea required id="why-does-it-fit" name="Why Does the Initiative Fit" rows="5" cols="30"></textarea></label>
+			</fieldset>
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+	<script src="script.js"></script>
+</body>
+</html>
