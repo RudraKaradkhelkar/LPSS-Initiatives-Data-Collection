@@ -1,81 +1,65 @@
 document.addEventListener('DOMContentLoaded', function () {
+    fetch('https://script.google.com/macros/s/AKfycbwtUkwrA8eC1G4XCfuQJHaaWXeBHYDuUqFqSczndseN6TP0kNXbjziPmEhFsFLBP4LC/exec')
+        .then(response => response.json())
+        .then(data => {
+            populateSelect(deptSelect, data.departments, newDeptInput);
+            populateSelect(orgSelect, data.organizations, newOrgInput);
+        });
+
     const deptSelect = document.getElementById('department');
     const newDeptInput = document.getElementById('newDeptInput');
     const otherDeptOption = document.createElement('option'); 
-    
     otherDeptOption.value = 'OTHER'; 
     otherDeptOption.textContent = 'Other'; 
     deptSelect.appendChild(otherDeptOption); 
-
-    const savedDeptOptions = JSON.parse(localStorage.getItem('customOptions')) || [];
-    savedDeptOptions.forEach(option => addDeptOption(option));
 
 
     const orgSelect = document.getElementById('organization-name');
     const newOrgInput = document.getElementById('newOrgInput');
     const otherOrgOption = document.createElement('option');
-    
     otherOrgOption.value = 'OTHER';
     otherOrgOption.textContent = 'Other';
     orgSelect.appendChild(otherOrgOption);
-
-    const savedOrgOptions = JSON.parse(localStorage.getItem('customOptions2')) || [];
-    savedOrgOptions.forEach(option => addOrgOption(option));
-
+  
     deptSelect.addEventListener('change', function () {
-        if (deptSelect.value === 'OTHER') {
-            newDeptInput.style.display = 'block';
-        } else {
-            newDeptInput.style.display = 'none';
-            newDeptInput.value = '';
-        }
+        toggleInputVisibility(deptSelect, newDeptInput);
     });
 
-    orgSelect.addEventListener('change', function(){
-        if(orgSelect.value==='OTHER'){
-            newOrgInput.style.display='block';
-        } else{
-            newOrgInput.style.display='none';
-            newOrgInput.value='';
-        }
+    orgSelect.addEventListener('change', function () {
+        toggleInputVisibility(orgSelect, newOrgInput);
     });
 
     document.getElementById('data-collection-form').addEventListener('submit', function (e) {
         e.preventDefault();
 
+        
         const newDept = newDeptInput.value.trim();
         if (deptSelect.value === 'OTHER' && newDept) {
             const option = document.createElement('option'); 
             option.value = newDept.toUpperCase()//.replace(/\s+/g, '-'); //Used to format value
             option.textContent = newDept;
-            deptSelect.insertBefore(option, otherDeptOption);  
-
+            
+            deptSelect.append(option);  
+            
             deptSelect.value = option.value;
-            // Save the new option to local storage 
-            savedDeptOptions.push(newDept); 
-            localStorage.setItem('customOptions', JSON.stringify(savedDeptOptions)); 
 
             newDeptInput.style.display = 'none'; 
-            newDeptInput.value = '';
+            newDeptInput.value = ''; 
         }
-        
-
         const newOrg = newOrgInput.value.trim();
         if(orgSelect.value==='OTHER'&&newOrg){
             const option = document.createElement('option'); 
             option.value = newOrg.toUpperCase()//.replace(/\s+/g, '-'); //Used to format value
             option.textContent = newOrg;
-            orgSelect.insertBefore(option, otherOrgOption);  
-
+            
+            orgSelect.append(option);  
+            
             orgSelect.value = option.value;
-            // Save the new option to local storage 
-            savedOrgOptions.push(newOrg); 
-            localStorage.setItem('customOptions2', JSON.stringify(savedOrgOptions)); 
 
             newOrgInput.style.display = 'none'; 
             newOrgInput.value = '';
+            
         }
-
 
         const timestampInput = document.getElementById('timestamp');
         const currentTimestamp = new Date();
@@ -83,31 +67,48 @@ document.addEventListener('DOMContentLoaded', function () {
         const centralTime = new Date(currentTimestamp.getTime() + offset * 3600 * 1000);            
         timestampInput.value = centralTime.toISOString();
 
-		const formData = new FormData(this); 
-		fetch(this.action, { 
-			method: 'POST', 
-			body: formData, 
-		}) 
-		.then(response => response.json()) 
-		.then(data => {
-            alert("Form submitted successfully. Thank you for supporting LPSS!");
-            document.getElementById('data-collection-form').reset();
-            deptSelect.value = '';
-		}) 
-		.catch(error => console.error('Error:', error)); 
-	});
 
-    function addDeptOption(value) { 
-        const option = document.createElement('option'); 
-        option.value = value.toUpperCase()//.replace(/\s+/g, '-'); //Used to format value
-        option.textContent = value; 
-        deptSelect.insertBefore(option, otherDeptOption); 
+        const formData = new FormData(this);
+
+        fetch('https://script.google.com/macros/s/AKfycby8UfSlLSTM74sibUpDF8nPQfYsMWGEW1_k5i46VFS26zB6LICta0QT6nuUwm-pwzFgUA/exec', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert("Form submitted successfully. Thank you for supporting LPSS!");
+                if(newDept){
+                    deptSelect.removeChild(deptSelect.lastChild);
+                }
+                if(newOrg){
+                    orgSelect.removeChild(orgSelect.lastChild);
+                }
+                
+                document.getElementById('data-collection-form').reset();
+                deptSelect.value = '';
+                orgSelect.value = '';
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    function populateSelect(selectElement, options, newInput) {
+        options.forEach(optionValue => {
+            const option = document.createElement('option');
+            option.value = optionValue;
+            option.textContent = optionValue;
+            selectElement.appendChild(option);
+        });
+
+
+        toggleInputVisibility(selectElement, newInput);
     }
 
-    function addOrgOption(value) { 
-        const option = document.createElement('option'); 
-        option.value = value.toUpperCase()//.replace(/\s+/g, '-'); //Used to format value
-        option.textContent = value; 
-        orgSelect.insertBefore(option, otherOrgOption); 
+    function toggleInputVisibility(selectElement, inputElement) {
+        if (selectElement.value === 'OTHER') {
+            inputElement.style.display = 'block';
+        } else {
+            inputElement.style.display = 'none';
+            inputElement.value = '';
+        }
     }
 });
