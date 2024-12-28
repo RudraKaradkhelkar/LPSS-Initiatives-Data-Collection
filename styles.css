@@ -94,7 +94,7 @@ select:not(:hover),input:not(:hover),textarea:not(:hover){
 
 input[type="submit"] {
   display: block;
-  width: 70%;
+  width: 2em;
   margin: auto;
   height: 2.5em;
   font-size: 1.3rem;
